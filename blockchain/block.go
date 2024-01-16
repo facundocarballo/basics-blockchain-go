@@ -14,17 +14,21 @@ type Block struct {
 	Nonce    int
 }
 
-func CreateBlock(data []byte, prevHash []byte) *Block {
-	block := &Block{[]byte{}, data, prevHash, 0}
+func RegisterBlock() {
+	gob.Register(&Block{})
+}
 
-	pow := NewProof(block)
+func CreateBlock(data []byte, prevHash []byte) *Block {
+	block := Block{[]byte{}, data, prevHash, 0}
+
+	pow := NewProof(&block)
 
 	nonce, hash := pow.Run()
 
 	block.Hash = hash[:]
 	block.Nonce = nonce
 
-	return block
+	return &block
 }
 
 func Genesis() *Block {
