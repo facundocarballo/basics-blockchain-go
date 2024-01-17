@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/facundocarballo/basics-blockchain-go/blockchain"
 	"github.com/facundocarballo/basics-blockchain-go/cli"
 )
@@ -10,9 +12,8 @@ func init() {
 }
 
 func main() {
-	chain := blockchain.Init()
-	defer chain.Database.Close()
+	defer os.Exit(1)
 
-	commandLine := &cli.CommandLine{Blockchain: chain}
-	commandLine.Run()
+	cli := cli.CommandLine{}
+	cli.Run()
 }

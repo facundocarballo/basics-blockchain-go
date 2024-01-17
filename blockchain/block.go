@@ -43,10 +43,12 @@ func (b *Block) IterateTransactions(
 ) bool {
 	for _, tx := range b.Transactions {
 		tx.IterateOutputs(address, spentTxOut, unspentTxs)
-		if tx.IsCoinbase() == false {
-			spentTxOut = tx.IterateInputs(address, spentTxOut)
+		if !tx.IsCoinbase() {
+			tx.IterateInputs(address, spentTxOut)
 		}
-		return len(b.PrevHash) != 0
+		if len(b.PrevHash) != 0 {
+			return true
+		}
 	}
 	return true
 }

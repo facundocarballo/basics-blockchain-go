@@ -1,7 +1,8 @@
 package cli
 
 const (
-	ADD_ARGUMENT   = "add"
-	PRINT_ARGUMENT = "print"
-	BLOCK_ARGUMENT = "block"
+	GET_BALANCE_ARGUMENT       = "getbalance"
+	CREATE_BLOCKCHAIN_ARGUMENT = "createblockchain"
+	SEND_ARGUMENT              = "send"
+	PRINT_ARGUMENT             = "print"
 )
