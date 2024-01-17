@@ -10,8 +10,9 @@ const (
 )
 
 // Creates
-func CreateDatabase(lastHash *[]byte, txn *badger.Txn) error {
-	genesis := Genesis()
+func CreateDatabase(address *string, lastHash *[]byte, txn *badger.Txn) error {
+	coinbaseTx := CoinbaseTx(*address, genesisData)
+	genesis := Genesis(coinbaseTx)
 	err := txn.Set(genesis.Hash, genesis.Serialize())
 	handlers.HandleErrors(err)
 	err = txn.Set([]byte(LAST_HASH_KEY), genesis.Hash)
